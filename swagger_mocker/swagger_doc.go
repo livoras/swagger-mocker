@@ -4,16 +4,16 @@ type SwaggerDoc struct {
 	BasePath string `json:"basePath"`
 	Host string `json:"host"`
 	Swagger string `json:"swagger"`
-	Tags []struct{
+	Tags []*struct{
 		Description string `json:"description"`
 		Name string `json:"name"`
 	} `json:"tags"`
-	Info struct{
+	Info *struct{
 		Description string `json:"description"`
 		Title string `json:"title"`
 		Version string `json:"version"`
 	} `json:"info"`
-	Definitions map[string]struct{
+	Definitions map[string]*struct{
 		Properties struct{
 			Code struct{
 				Description string `json:"description"`
@@ -34,12 +34,14 @@ type SwaggerDoc struct {
 		Title string `json:"title"`
 		Type string `json:"type"`
 	} `json:"definitions"`
-	Paths map[string]struct{
-		Post Api `json:"post"`
-		Get Api `json:"get"`
-		PUT Api `json:"put"`
-		DELETE Api `json:"delete"`
-	} `json:"paths"`
+	Paths map[string]*ApiGroup `json:"paths"`
+}
+
+type ApiGroup struct{
+	Post *Api `json:"post"`
+	Get *Api `json:"get"`
+	PUT *Api `json:"put"`
+	DELETE *Api `json:"delete"`
 }
 
 type Api struct {
